@@ -1,0 +1,11 @@
+#邮件发送配置
+spring:
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 2398755314@qq.com
+    password: unlpqdeaqmhdeccb
+    default-encoding: utf-8
+    #收件人邮箱配置
+    users: gankuizhi@eigpay.cn|164970541@qq.com
+    surl: http://www.baidu.com
