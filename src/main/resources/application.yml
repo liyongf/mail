@@ -1,4 +1,4 @@
-#ÓÊ¼ş·¢ËÍÅäÖÃ
+#é‚®ä»¶å‘é€é…ç½®
 spring:
   mail:
     host: smtp.qq.com
@@ -6,6 +6,14 @@ spring:
     username: 2398755314@qq.com
     password: unlpqdeaqmhdeccb
     default-encoding: utf-8
-    #ÊÕ¼şÈËÓÊÏäÅäÖÃ
+    #æ”¶ä»¶äººé‚®ç®±é…ç½®
     users: gankuizhi@eigpay.cn|164970541@qq.com
     surl: http://www.baidu.com
+  datasource:
+    username: root
+    password: admin
+    url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  type-aliases-package:com.liyf.boot.entity
