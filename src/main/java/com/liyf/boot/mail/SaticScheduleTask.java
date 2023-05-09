@@ -25,7 +25,7 @@ public class SaticScheduleTask {
     @Value("${spring.mail.surl}")
     private String surl; //监控url
 
-    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0 0/5  * * ?")
     private void dayTasks() {
         task(true);
     }

@@ -1,3 +1,4 @@
+server.port: 9000
 #邮件发送配置
 spring:
   mail:
@@ -9,6 +10,7 @@ spring:
     #收件人邮箱配置
     users: gankuizhi@eigpay.cn|164970541@qq.com
     surl: http://www.baidu.com
+    passwords: Dz@2022!
   datasource:
     username: root
     password: admin

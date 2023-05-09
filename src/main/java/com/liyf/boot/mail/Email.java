@@ -1,23 +1,26 @@
 package com.liyf.boot.mail;
 
+import com.alibaba.fastjson.JSONObject;
+import com.liyf.boot.mail.util.HttpUtils;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpMethod;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.*;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 import com.wordnik.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 public class Email {
     @Autowired
@@ -65,5 +68,38 @@ public class Email {
         }
         mailSender.send(message);
         return  "success";
+    }
+    @ResponseBody
+    @RequestMapping(value = "/json/data", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public String getByJSON(@RequestBody JSONObject jsonParam) {
+        // 直接将json信息打印出来
+        //System.out.println(jsonParam.toJSONString());
+        String cameraIndexCode=jsonParam.getString("cameraIndexCode");
+        String url="/api/video/v2/cameras/previewURLs";
+        HttpMethod method =HttpMethod.POST;
+        com.alibaba.fastjson.JSONObject json = new com.alibaba.fastjson.JSONObject();
+        json.put("cameraIndexCode", cameraIndexCode);
+        json.put("streamType",0);
+        json.put("protocol","rtsp");
+        json.put("transmode",1);
+        json.put("expand","transcode=0");
+        json.put("streamform","ps");
+        com.alibaba.fastjson.JSONObject res=new com.alibaba.fastjson.JSONObject();
+        try {
+            String result = HttpUtils.post(url,method,json);
+            if(result!=null){
+                res=com.alibaba.fastjson.JSONObject.parseObject(result);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JSONObject data=new JSONObject();
+        data.put("url",res.getJSONObject("data").getString("url"));
+        // 将获取的json数据封装一层，然后在给返回
+        JSONObject result = new JSONObject();
+        result.put("code", "0");
+        result.put("msg", "success");
+        result.put("data", data);
+        return result.toJSONString();
     }
 }

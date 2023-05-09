@@ -7,7 +7,7 @@ import java.util.List;
 @Mapper
     public interface UserMapper {
 
-        @Select("select*from user")
+        @Select("select id,username,password,realname from t_s_base_user where is_delete='0'")
         List<UserAliase> getAll();
 
         @Select("select * from user where username=#{username}")
@@ -19,8 +19,8 @@ import java.util.List;
         @Delete("delete from user where username=#{username}")
         void delete(String username);
 
-        @Update("update user set password=#{password} where username=#{username}")
-        void changePassword(String username,String password);
+        @Update("update t_s_base_user set password=#{password} where username=#{username}")
+        void changePassword(@Param("username")String username,@Param("password")String password);
 
 
 }
