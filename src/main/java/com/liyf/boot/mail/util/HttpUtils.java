@@ -1,5 +1,6 @@
 package com.liyf.boot.mail.util;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.poi.util.IOUtils;
 import org.springframework.http.*;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.util.MultiValueMap;
@@ -7,7 +8,12 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.Date;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 /**
  * @author: Seven.wk
  * @description: 辅助工具类
@@ -32,24 +38,36 @@ public class HttpUtils {
         ResponseEntity<String> response = client.exchange(url, method, requestEntity, String.class);
         return response.getBody();
     }
-    public static  void  main(String args[]){
-        try{
-            //api url地址
-            String url = "http://127.0.0.1:8081/json/data";
-            //post请求
-            HttpMethod method =HttpMethod.POST;
-            JSONObject json = new JSONObject();
-            json.put("name", "wangru");
-            json.put("sex", "男");
-            json.put("age", "27");
-            json.put("address", "Jinan China");
-            json.put("time", new Date());
-            System.out.print("发送数据："+json.toString());
-            //发送http请求并返回结果
-            String result = HttpUtils.post(url,method,json);
-            System.out.print("接收反馈："+result);
-        }catch (Exception e){
-        }
-    }
+    public static void main(String[] args) throws IOException {
+        // 创建Workbook对象
+        Workbook workbook = new XSSFWorkbook();
 
+        // 创建Sheet表
+        Sheet sheet = workbook.createSheet("Sheet2");
+
+        // 加载图片文件
+        InputStream inputStream = new FileInputStream("C:\\Users\\admin\\Pictures\\1.jpeg");
+        byte[] imageBytes = IOUtils.toByteArray(inputStream);
+
+        // 创建Drawing对象
+        Drawing<?> drawing = sheet.createDrawingPatriarch();
+
+        // 创建锚点
+        ClientAnchor anchor = workbook.getCreationHelper().createClientAnchor();
+        anchor.setCol1(1);
+        anchor.setRow1(1);
+        anchor.setCol2(4);
+        anchor.setRow2(4);
+
+        // 插入图片
+        int pictureIndex = workbook.addPicture(imageBytes, Workbook.PICTURE_TYPE_JPEG);
+        Picture picture = drawing.createPicture(anchor, pictureIndex);
+
+        // 保存Excel文件
+        FileOutputStream outputStream = new FileOutputStream("C:\\Users\\admin\\Pictures\\output.xlsx");
+        workbook.write(outputStream);
+        workbook.close();
+        outputStream.close();
+
+    }
 }
