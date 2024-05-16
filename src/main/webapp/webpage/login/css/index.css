@@ -1,0 +1,24 @@
+﻿a,address,b,big,blockquote,body,cite,code,dd,del,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,i,iframe,img,ins,label,input
+,legend,li,ol,p,pre,small,span,strong,ul{margin:0;padding:0;font-family: 'Microsoft YaHei'}
+li{list-style-type: none;}
+a{text-decoration: none;color:#333;}
+a:hover{text-decoration: none;}
+input{outline:none;}
+select{outline:none;}
+textarea{outline:none;}
+img{border:none;}
+
+.header{height: 87px;background: url('../images/header.png') center center no-repeat; padding-top: 10px;}
+.context{height: 600px;position: relative;background: url('../images/login_bg600.jpg') no-repeat;min-width: 1464px}
+.context form{height: 434px;width:430px;background-color:#DFE2E4;position: absolute;left: 50%;top: 50%;margin-left: 85px;margin-top:-217px;z-index: 2000}
+.context form h1{height: 80px;color:#fff;font-size: 32px;line-height: 80px;text-align: center;background-color: #0c40ba;font-weight:500;letter-spacing:4px;box-shadow: 0 7px 3px 1px #c0c0c0;margin-bottom: 66px}
+.context form h1 i{width:17px;height: 104px;position: absolute;left: -17px;top: 0;background: url('../images/left01.png') no-repeat;}
+.context form h1 b{width:16px;height: 104px;position: absolute;right: -16px;top: 0;background: url('../images/right01.png') no-repeat;}
+.context form .userinfo{height:52px;position: relative;margin-bottom: 46px}
+.context form .userinfo input{width: 284px;height:44px;border:2px solid #C9CFD3;float: left;margin-left: 42px;border-radius: 8px;padding-left: 60px;font-size: 16px;line-height: 44px}
+.context form .userinfo input:hover{border:2px solid #7E80D7;}
+.context form .userinfo i,.context form .userinfo b{width:50px;height: 36px;background: url('../images/icon_user.png') 14px 6px no-repeat;position: absolute;left:43px;top: 6px;border-right: 1px solid #DDDDDD}
+.context form .userinfo i{background: url('../images/icon_user.png') 14px 6px no-repeat;}
+.context form .userinfo b{background: url('../images/icon_lock.png') 14px 6px no-repeat;}
+.context form button{width: 341px;height: 46px;background: url('../images/btn.png') no-repeat;border:none;font-size: 28px;line-height: 44px;color:#fff;float: left;margin-left:42px;cursor:pointer;}
+.foot{height: 80px;line-height: 80px;text-align: center;font-size:20px;}

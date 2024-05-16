@@ -1,0 +1,74 @@
+import SuperMap from '../SuperMap';
+
+/*
+ * 服务发布状态
+ */
+export var ServiceStatus = SuperMap.ServiceStatus = {
+    DOES_NOT_INVOLVE: "DOES_NOT_INVOLVE",
+    PUBLISH_FAILED: "PUBLISH_FAILED",
+    PUBLISHED: "PUBLISHED",
+    PUBLISHING: "PUBLISHING",
+    UNPUBLISHED: "UNPUBLISHED",
+    UNPUBLISHED_FAILED: "UNPUBLISHED_FAILED"
+};
+
+/*
+ * 数据项类型
+ */
+export var DataItemType = SuperMap.DataItemType = {
+    AUDIO: "AUDIO",
+    COLOR: "COLOR",
+    COLORSCHEME: "COLORSCHEME",
+    CSV: "CSV",
+    EXCEL: "EXCEL",
+    FILLSYMBOL: "FILLSYMBOL",
+    IMAGE: "IMAGE",
+    LAYERTEMPLATE: "LAYERTEMPLATE",
+    LAYOUTTEMPLATE: "LAYOUTTEMPLATE",
+    LINESYMBOL: "LINESYMBOL",
+    MAPTEMPLATE: "MAPTEMPLATE",
+    MARKERSYMBOL: "MARKERSYMBOL",
+    MBTILES: "MBTILES",
+    PHOTOS: "PHOTOS",
+    SHP: "SHP",
+    SMTILES: "SMTILES",
+    SVTILES: "SVTILES",
+    THEMETEMPLATE: "THEMETEMPLATE",
+    TPK: "TPK",
+    UDB: "UDB",
+    UGCV5: "UGCV5",
+    UNKNOWN: "UNKNOWN",
+    VIDEO: "VIDEO",
+    WORKENVIRONMENT: "WORKENVIRONMENT",
+    WORKSPACE: "WORKSPACE"
+};
+
+/*
+ * 数据排序字段
+ */
+export var DataItemOrderBy = SuperMap.DataItemOrderBy = {
+    FILENAME: "FILENAME",
+    ID: "ID",
+    LASTMODIFIEDTIME: "LASTMODIFIEDTIME",
+    NICKNAME: "NICKNAME",
+    SERVICESTATUS: "SERVICESTATUS",
+    SIZE: "SIZE",
+    STATUS: "STATUS",
+    TYPE: "TYPE",
+    UPDATETIME: "UPDATETIME",
+    USERNAME: "USERNAME"
+};
+
+/*
+ * 关键字查询时的过滤字段
+ */
+export var FilterField = SuperMap.FilterField = {
+    LINKPAGE: "LINKPAGE",
+    MAPTITLE: "MAPTITLE",
+    NICKNAME: "NICKNAME",
+    RESTITLE: "RESTITLE",
+    USERNAME: "USERNAME"
+};
+
+
+

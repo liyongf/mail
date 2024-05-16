@@ -1,0 +1,24 @@
+var fxdjDateMap = new HashMap();
+//低风险
+fxdjDateMap.put("1_","fxdj_dfx");
+fxdjDateMap.put("2_","fxdj_dfx");
+//一般风险
+fxdjDateMap.put("3_","fxdj_ybfx");
+fxdjDateMap.put("4_","fxdj_ybfx");
+fxdjDateMap.put("5_","fxdj_ybfx");
+fxdjDateMap.put("6_","fxdj_ybfx");
+fxdjDateMap.put("8_","fxdj_ybfx");
+//中等风险
+fxdjDateMap.put("10_","fxdj_zdfx");
+fxdjDateMap.put("12_","fxdj_zdfx");
+fxdjDateMap.put("15_","fxdj_zdfx");
+fxdjDateMap.put("16_","fxdj_zdfx");
+fxdjDateMap.put("9_","fxdj_zdfx");
+//重大风险
+fxdjDateMap.put("18_","fxdj_zdafx");
+fxdjDateMap.put("20_","fxdj_zdafx");
+fxdjDateMap.put("24_","fxdj_zdafx");
+fxdjDateMap.put("25_","fxdj_zdafx");
+//特别重大风险
+fxdjDateMap.put("30_","fxdj_tbzdfx");
+fxdjDateMap.put("36_","fxdj_tbzdfx");

@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>经纬度坐标系图层</title>
+    <!--引用需要的脚本 注意：SuperMap.Include.js内部已经动态引用相关JS，CSS文件-->
+    <!--<script src="libs/SuperMap.Include.js"></script>-->
+	<script src="dist/include-classic.js"></script>
+	
+    <script>
+        //声明全局变量 map、layer、url
+        var map, layer, url = "http://localhost:8090/iserver/services/map-shandong-zibo/rest/maps/zibo";
+		//url="http://support.supermap.com.cn:8090//iserver/services/map-world/rest/maps/World"
+		url="http://localhost:8090//iserver/services/map-world/rest/maps/World";
+		//url="http://localhost:8090//iserver/services/map-ws/rest/maps/未命名地图";
+		url="http://localhost:8090//iserver/services/map-ws/rest/maps/zhaizhen2";
+        function init() {
+            //1.在指定DOM元素上初始化地图对象。
+            map = new SuperMap.Map("map");
+            //2.添加控件。
+            map.addControl(new SuperMap.Control.ScaleLine());
+            map.addControl(new SuperMap.Control.LayerSwitcher()); 
+            map.addControl(new SuperMap.Control.MousePosition());
+            //2.初始化图层。
+            //创建分块动态REST图层，该图层显示iserver 8C 服务发布的地图,
+            //其中"想要"为图层名称，url图层的服务地址，{transparent: true}设置到url的可选参数
+            layer = new SuperMap.Layer.TiledDynamicRESTLayer("zibo", url, null, { maxResolution: "auto" }); 
+            //监听图层信息加载完成事件，异步加载图层。
+            layer.events.on({ "layerInitialized": addLayer });
+        }
+        function addLayer() {
+            //将Layer图层加载到Map对象上。
+            map.addLayers([layer]);
+            //出图，设置中心点，指定放缩级别。
+            //map.setCenter(new SuperMap.LonLat(118.11908, 36.68166), 3);
+			//map.setCenter(new SuperMap.LonLat(-175.311611, 33.622773), 3);
+			map.setCenter(new SuperMap.LonLat(20559400.471959,3978284.812101), 0);
+			//20559400.471959,Y:3978284.812101
+        }
+    </script>
+</head>
+<body onload="init()">
+    <!--地图显示的div-->
+    <div id="map" style="position: absolute; left: 0px; right: 0px; width: auto; height: 90%;">
+    </div>
+</body>
+</html>

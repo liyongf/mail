@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+       default-autowire="byName" default-lazy-init="false">
+
+    <bean id="taskHiddenDangerReport" class="com.sdzk.buss.web.common.task.HiddenDangerReportTask"></bean>
+
+    <bean id="taskMajorHiddenDangerReport" class="com.sdzk.buss.web.common.task.MajorHiddenDangerReportTask"></bean>
+
+    <bean id="taskThreeViolationReport" class="com.sdzk.buss.web.common.task.ThreeViolationReportTask"></bean>
+
+    <bean id="taskReportRiskFactorRel" class="com.sdzk.buss.web.common.taskProvince.ReportRiskFactorRel"></bean>
+    <bean id="taskReportHazardFactors" class="com.sdzk.buss.web.common.taskProvince.ReportHazardFactorsTask"></bean>
+    <bean id="taskReportAddressInfo" class="com.sdzk.buss.web.common.taskProvince.ReportAddressInfo"></bean>
+    <bean id="taskReportLayerInfo" class="com.sdzk.buss.web.common.taskProvince.ReportLayerInfo"></bean>
+    <bean id="taskReportRisk" class="com.sdzk.buss.web.common.taskProvince.ReportRiskTask"></bean>
+
+    <bean id="taskReportTaskAllManage" class="com.sdzk.buss.web.common.taskProvince.ReportTaskAllManage"></bean>
+
+    <bean id="taskReportTaskAllManageCheckRel" class="com.sdzk.buss.web.common.taskProvince.ReportTaskAllManageCheckRel"></bean>
+    <bean id="taskReportLoginCountNum" class="com.sdzk.buss.web.common.taskProvince.ReportLoginCountNum"></bean>
+
+
+    <bean id="taskReportDeleteId" class="com.sdzk.buss.web.common.taskProvince.ReportDeleteId"></bean>
+
+    <task:scheduled-tasks>
+         <!--上报煤监定时任务，start -->
+        <task:scheduled ref="taskMajorHiddenDangerReport" method="run" cron="0 0 0/1 * * ?"/>
+        <task:scheduled ref="taskHiddenDangerReport" method="run" cron="0 0 0/1 * * ?"/>
+        <task:scheduled ref="taskThreeViolationReport" method="run" cron="0 0 0/1 * * ?"/>
+        <task:scheduled ref="taskReportRisk" method="run" cron="0 0 0/1 * * ?"/>
+        <task:scheduled ref="taskReportHazardFactors" method="run" cron="0 0 0/1 * * ?"/>
+        <task:scheduled ref="taskReportAddressInfo" method="run" cron="0 0 0/1 * * ?"/>
+        <task:scheduled ref="taskReportLayerInfo" method="run" cron="0 0 0/1 * * ?"/>
+        <task:scheduled ref="taskReportRiskFactorRel" method="run" cron="0 0 0/1 * * ?"/>
+        <task:scheduled ref="taskReportTaskAllManage" method="run" cron="0 0 0/1 * * ?"/>
+        <task:scheduled ref="taskReportTaskAllManageCheckRel" method="run" cron="0 0 0/1 * * ?"/>
+        <task:scheduled ref="taskReportLoginCountNum" method="run" cron="0 0 0/1 * * ?"/>
+        <task:scheduled ref="taskReportDeleteId" method="run" cron="0 0 0/1 * * ?"/>
+    </task:scheduled-tasks>
+</beans>

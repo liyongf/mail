@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+
+
+	<!-- 定时任务配置 scheduler 方式 注解 暂时不支持动态更新 -->
+	<context:component-scan base-package="org.jeecgframework.core.timer" />
+	<context:component-scan base-package="com.sdzk.buss.web.common.task" />
+	<task:executor id="executor" pool-size="5" />
+	<task:scheduler id="scheduler" pool-size="10" />
+	<task:annotation-driven executor="executor" scheduler="scheduler" />
+
+
+	<!-- 定时任务配置   smsSendTask 可配置到管理界面 -->
+	<!--<bean id="smsSendTaskJob"-->
+		<!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+		<!--<property name="targetObject" ref="smsSendTask" />-->
+		<!--<property name="targetMethod" value="run" />-->
+		<!--<property name="concurrent" value="true" />-->
+	<!--</bean>-->
+
+	<!--<bean id="smsSendTaskCronTrigger" class="org.jeecgframework.core.timer.DataBaseCronTriggerBean">-->
+		<!--<property name="jobDetail" ref="smsSendTaskJob" />-->
+		<!--<property name="cronExpression" value="0 0/1 * * * ?" />-->
+	<!--</bean>-->
+
+	<!-- 定时上报隐患数据 -->
+	<bean id="hiddenDangerReportTaskJob"
+	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<property name="targetObject" ref="hiddenDangerReportTask" />
+	<property name="targetMethod" value="run" />
+	<property name="concurrent" value="true" />
+	</bean>
+
+	<bean id="hiddenDangerReportTaskCronTrigger" class="org.jeecgframework.core.timer.DataBaseCronTriggerBean">
+	<property name="jobDetail" ref="hiddenDangerReportTaskJob" />
+	<property name="cronExpression" value="0 0/1 * * * ?" />
+	</bean>
+
+	<!-- 定时上报重大隐患数据 -->
+	<bean id="majorHiddenDangerReportTaskJob"
+		  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="majorHiddenDangerReportTask" />
+		<property name="targetMethod" value="run" />
+		<property name="concurrent" value="true" />
+	</bean>
+
+	<bean id="majorHiddenDangerReportTaskCronTrigger" class="org.jeecgframework.core.timer.DataBaseCronTriggerBean">
+		<property name="jobDetail" ref="majorHiddenDangerReportTaskJob" />
+		<property name="cronExpression" value="0 0/1 * * * ?" />
+	</bean>
+
+	<!-- 定时上报重大年度风险数据 -->
+	<bean id="reportMajorYearRiskTaskJob"
+		  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="reportMajorYearRiskTask" />
+		<property name="targetMethod" value="run" />
+		<property name="concurrent" value="true" />
+	</bean>
+
+	<bean id="reportMajorYearRiskTaskCronTrigger" class="org.jeecgframework.core.timer.DataBaseCronTriggerBean">
+		<property name="jobDetail" ref="reportMajorYearRiskTaskJob" />
+		<property name="cronExpression" value="0 0/1 * * * ?" />
+	</bean>
+
+	<!-- 定时上报年度风险数据 -->
+	<bean id="reportYearRiskTaskJob"
+		  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="reportYearRiskTask" />
+		<property name="targetMethod" value="run" />
+		<property name="concurrent" value="true" />
+	</bean>
+
+	<bean id="reportYearRiskTaskCronTrigger" class="org.jeecgframework.core.timer.DataBaseCronTriggerBean">
+		<property name="jobDetail" ref="reportYearRiskTaskJob" />
+		<property name="cronExpression" value="0 0/1 * * * ?" />
+	</bean>
+
+	<!-- 定时上报专项风险数据 -->
+	<bean id="specialEvaluateReportTaskJob"
+		  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="specialEvaluateReportTask" />
+		<property name="targetMethod" value="run" />
+		<property name="concurrent" value="true" />
+	</bean>
+
+	<bean id="specialEvaluateReportTaskCronTrigger" class="org.jeecgframework.core.timer.DataBaseCronTriggerBean">
+		<property name="jobDetail" ref="specialEvaluateReportTaskJob" />
+		<property name="cronExpression" value="0 0/1 * * * ?" />
+	</bean>
+
+    <!-- 定时上报三违数据 -->
+    <bean id="threeViolationTaskJob"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="threeViolationReportTask" />
+        <property name="targetMethod" value="run" />
+        <property name="concurrent" value="true" />
+    </bean>
+
+    <bean id="threeViolationReportTaskCronTrigger" class="org.jeecgframework.core.timer.DataBaseCronTriggerBean">
+        <property name="jobDetail" ref="threeViolationTaskJob" />
+        <property name="cronExpression" value="0 0/1 * * * ?" />
+    </bean>
+
+	<!-- 定时任务调度器 -->
+	<bean id="schedulerFactory" lazy-init="false" autowire="no"
+		class="org.jeecgframework.core.timer.DataBaseSchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!--<ref bean="reportMajorYearRiskTaskCronTrigger" />-->
+                <!-- 以下为测试已结束 -->
+				<!--<ref bean="threeViolationReportTaskCronTrigger" />
+                <ref bean="hiddenDangerReportTaskCronTrigger" />
+                <ref bean="majorHiddenDangerReportTaskCronTrigger" />
+                <ref bean="specialEvaluateReportTaskCronTrigger" />
+                <ref bean="reportYearRiskTaskCronTrigger" />-->
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- 定时上报集团 -->
+	<bean id="reportHiddenDanger" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+	<bean id="reportMajorHiddenDanger" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+	<bean id="reportYearRisk" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+	<bean id="reportSpecialEvaluation" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+	<bean id="reportMajorYearRisk" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+	<bean id="reportThreeViolations" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+	<bean id="reportInvestigatePlan" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+	<bean id="reportLoginCount" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+
+    <bean id="reportSumNum" class="com.sdzk.buss.web.common.task.ReportSumNumAllTask"/>
+	<bean id="saveToke" class="com.sdzk.buss.web.common.task.GetTokenTask"/>
+	<bean id="getUserList" class="com.sdzk.buss.web.common.task.GetTokenTask"/>
+	<bean id="postUserList" class="com.sdzk.buss.web.common.task.GetTokenTask" />
+	<bean id="syncToCloudTask" class="com.sdzk.buss.web.common.task.SyncToCloudTask" />
+
+	<!--地标-->
+	<bean id="reportPost" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+	<bean id="reportHazardFactors" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+	<bean id="reportRiskIdentification" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+	<bean id="reportRiskFactortsRel" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+	<bean id="reportTBAddressInfo" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+	<bean id="reportTBLayer" class="com.sdzk.buss.web.common.task.ReportGroupTask" />
+
+	<!--上报集团月度风险-->
+	<bean id="monthRisk" class="com.sdzk.buss.web.common.task.MonthRiskReportGroupTask" />
+
+
+	<task:scheduled-tasks>
+		<!--每天凌晨1:00执行-->
+		<!--<task:scheduled ref="reportHiddenDanger" method="reportHiddenDanger" cron="0 0 1 * * ?"/>
+		<task:scheduled ref="reportMajorHiddenDanger" method="reportMajorHiddenDanger" cron="0 0 1 * * ?"/>
+		<task:scheduled ref="reportYearRisk" method="reportYearRisk" cron="0 0 1 * * ?"/>
+		<task:scheduled ref="reportSpecialEvaluation" method="reportSpecialEvaluation" cron="0 0 1 * * ?"/>
+		<task:scheduled ref="reportMajorYearRisk" method="reportMajorYearRisk" cron="0 0 1 * * ?"/>
+		<task:scheduled ref="reportThreeViolations" method="reportThreeViolations" cron="0 0 1 * * ?"/>
+		<task:scheduled ref="reportInvestigatePlan" method="reportInvestigatePlan" cron="0 0 1 * * ?"/>
+		<task:scheduled ref="reportLoginCount" method="reportLoginCount" cron="0 0 1 * * ?"/>
+
+        <task:scheduled ref="reportSumNum" method="reportSumNum" cron="0 0 1 * * ?"/>-->
+
+
+		<!--地标-->
+		<!--<task:scheduled ref="reportPost" method="reportPost" cron="0 43 09 * * ?"/>
+		<task:scheduled ref="reportHazardFactors" method="reportHazardFactors" cron="0 43 09 * * ?"/>
+		<task:scheduled ref="reportRiskIdentification" method="reportRiskIdentification" cron="0 43 09 * * ?"/>
+		<task:scheduled ref="reportRiskFactortsRel" method="reportRiskFactortsRel" cron="0 43 09 * * ?"/>
+		<task:scheduled ref="reportTBAddressInfo" method="reportTBAddressInfo" cron="0 43 09 * * ?"/>
+		<task:scheduled ref="reportTBLayer" method="reportTBLayer" cron="0 43 09 * * ?"/>-->
+
+		<!-- 上报集团月度风险-->
+		<task:scheduled ref="monthRisk" method="reportMonthRisk" cron="0 0 1 * * ?"/>
+
+		<!-- 微信定时任务-->
+		<!--<task:scheduled ref="saveToke" method="saveToke" cron="0 0 0/1 * * ?"/>-->
+		<!--<task:scheduled ref="getUserList" method="getUserList" cron="0 0 1 * * ?"/>-->
+		<!--<task:scheduled ref="postUserList" method="postUserList" cron="0 0 2 * * ?"/>-->
+
+		<task:scheduled ref="syncToCloudTask" method="operationLogReport" cron="0 0 1 * * ?"/>
+		<!--<task:scheduled ref="syncToCloudTask" method="addressInfoReport" cron="0 0 1 * * ?"/>
+		<task:scheduled ref="syncToCloudTask" method="dangerSourceReport" cron="0 0 1 * * ?"/>
+		<task:scheduled ref="syncToCloudTask" method="addressRiskRelReport" cron="0 0 1 * * ?"/>
+		<task:scheduled ref="syncToCloudTask" method="hiddenDangerReport" cron="0 0 1 * * ?"/>
+		<task:scheduled ref="syncToCloudTask" method="violationReport" cron="0 0 1 * * ?"/>-->
+	</task:scheduled-tasks>
+</beans>

@@ -1,0 +1,10 @@
+/*隐藏百度logo*/
+.anchorBL {
+    display: none;
+}
+
+/*-隐藏页眉页脚*/
+@page {
+    size: auto;  /* auto is the initial value */
+    margin: 0mm; /* this affects the margin in the printer settings */
+}

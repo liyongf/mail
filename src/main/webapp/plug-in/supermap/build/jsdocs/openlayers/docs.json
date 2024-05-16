@@ -1,0 +1,31 @@
+{
+    "opts": {
+        "recurse": true,
+        "template": "../template",
+        "destination": "./docs/openlayers"
+    },
+    "disqus":"",
+    "tags": {
+        "allowUnknownTags": true,
+        "linkdoc-openlayers":"https://openlayers.org/en/latest/apidoc/"
+    },
+    "source": {
+        "includePattern": ".+\\.js?$",
+        "excludePattern": ".+\\\\src\\\\common\\\\iServer\\\\.*Service.js?$",
+        "include": [
+            "src/common","src/openlayers"
+        ],
+        "exclude": [
+            "src/common/overlay/feature","src/common/overlay/levelRenderer"
+        ]
+    },
+    "plugins": ["plugins/markdown","../plugins/linkdoc"],
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false,
+        "default": {
+            "outputSourceFiles": false
+        }
+        //"applicationName": "iClient for OpenLayers"
+    }
+}

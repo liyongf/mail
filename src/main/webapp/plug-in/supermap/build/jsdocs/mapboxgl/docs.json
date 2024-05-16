@@ -1,0 +1,30 @@
+{
+    "opts": {
+        "recurse": true,
+        "template": "../template",
+        "destination": "./docs/mapboxgl"
+    },
+    "disqus":"",
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "source": {
+        "includePattern": ".+\\.js?$",
+        //"excludePattern": ".+\\\\src\\\\common\\\\iServer\\\\.*Service|Base.js?$",
+        "include": [
+            "src/common","src/mapboxgl"
+        ],
+        "exclude": [
+            "src/common/overlay/feature","src/common/overlay/levelRenderer"
+        ]
+    },
+    "plugins": ["plugins/markdown"],
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false,
+        "default": {
+            "outputSourceFiles": false
+        }
+        //"applicationName": "iClient for MapboxGL"
+    }
+}

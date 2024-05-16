@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+       default-autowire="byName" default-lazy-init="false">
+
+    <bean id="reportToProvince" class="com.sdzk.buss.web.common.task.ReportToProvinceTask"/>
+    <task:scheduled-tasks>
+        <!--2023/10 上报省局重构  -->
+        <!--1.图形文件 每天一点-->
+        <task:scheduled ref="reportToProvince" method="reportPictureTask" cron="0 0 1 * * ?"/>
+        <!--2.风险点 每天两点-->
+        <task:scheduled ref="reportToProvince" method="reportRiskPointTask" cron="0 0 2 * * ?"/>
+        <!--3.风险辨识任务 每天三点-->
+        <task:scheduled ref="reportToProvince" method="reportRiskIdentTask" cron="0 0 3 * * ?"/>
+        <!--4.风险清单 每天三点半-->
+        <task:scheduled ref="reportToProvince" method="reportRiskTask" cron="0 30 3 * * ?"/>
+        <!--5.风险管控措施 每天五点-->
+        <task:scheduled ref="reportToProvince" method="reportRiskMeasureTask" cron="0 0 5 * * ?"/>
+        <!--6.风险管控记录 每天-->
+        <task:scheduled ref="reportToProvince" method="reportRiskControlTask" cron="0 10 * * * ?"/>
+        <!--7.隐患台账 每个小时的20分一次-->
+        <task:scheduled ref="reportToProvince" method="reportHiddenTask" cron="0 20 * * * ?"/>
+        <!--8.三违信息 每个小时的40分一次-->
+        <task:scheduled ref="reportToProvince" method="reportThreeVioTask" cron="0 40 * * * ?"/>
+        <!--9.重大风险管控方案 每天一点十分-->
+        <task:scheduled ref="reportToProvince" method="sfPlanInfoTask" cron="0 10 1 * * ?"/>
+        <!--10.重大隐患档案信息 每天一点十五分-->
+        <task:scheduled ref="reportToProvince" method="sfArchiveInfoTask" cron="0 15 1 * * ?"/>
+        <!--11.培训档案 每天一点二十五分-->
+        <task:scheduled ref="reportToProvince" method="sfTrainingInfoTask" cron="0 25 1 * * ?"/>
+        <!--12.双重预防工作制度 每天一点三十五分-->
+        <task:scheduled ref="reportToProvince" method="sfSysFileInfoTask" cron="0 35 1 * * ?"/>
+        <!--13.报告文件 每天一点四十五分-->
+        <task:scheduled ref="reportToProvince" method="reportReportInfoTask" cron="0 45 1 * * ?"/>
+        <!--14.登录数据 每两小时一次-->
+        <task:scheduled ref="reportToProvince" method="reportLoginLog" cron="0 0 0/2 * * ?"/>
+
+    </task:scheduled-tasks>
+</beans>
